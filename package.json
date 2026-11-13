@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=22.23.5"
   },
   "description": "AI-powered security scanner — autonomous vulnerability discovery and remediation for solo developers",
   "workspaces": [

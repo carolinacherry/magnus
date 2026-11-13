@@ -1,11 +1,13 @@
-# Pin Node.js to 22.23.4-slim (21 Oct 2026 security release): Brotli decoder
-# RCE (CVE-2026-111497), TLS hostname bypasses, and eMudhra CA removal.
-# The digest is the multi-arch index for node:22.23.4-slim. Keep both FROM
+# Pin Node.js to 22.23.5-slim (11 Nov 2026 security release): HTTPS heap
+# memory disclosure (CVE-2026-123864), HTTP/2 leak and use-after-free
+# (CVE-2026-123865, CVE-2026-123866), and TLS 1.2 renegotiation client-cert
+# bypass (CVE-2026-123872).
+# The digest is the multi-arch index for node:22.23.5-slim. Keep both FROM
 # lines identical.
 # To bump, print the new index digest and update the tag and digest together:
 #   docker buildx imagetools inspect node:<version>-slim
 # Stage 1: Build frontend and backend
-FROM node:22.23.4-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS build
+FROM node:22.23.5-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS build
 
 WORKDIR /app
 
@@ -25,7 +27,7 @@ RUN npm run build
 
 # Stage 2: Production image with system Chromium.
 # Same Node pin as the build stage.
-FROM node:22.23.4-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
+FROM node:22.23.5-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
 
 # Chromium stays on apt and unpinned so a rebuild installs Debian's current
 # package, which is how Chrome 156 critical fixes (and later updates) land.
